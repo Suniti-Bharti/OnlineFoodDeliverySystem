@@ -24,12 +24,36 @@ public class UserDAO {
         }
     }
 
+//    public User login(String email, String password) {
+//        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+//        try (Connection conn = DBConnection.getConnection();
+//             PreparedStatement ps = conn.prepareStatement(sql)) {
+//            ps.setString(1, email);
+//            ps.setString(2, password);
+//            ResultSet rs = ps.executeQuery();
+//            if (rs.next()) {
+//                User u = new User();
+//                u.setUserId(rs.getInt("user_id"));
+//                u.setName(rs.getString("name"));
+//                u.setEmail(rs.getString("email"));
+//                u.setPhone(rs.getString("phone"));
+//                u.setAddress(rs.getString("address"));
+//                u.setPassword(rs.getString("password"));
+//                return u;
+//            }
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//        return null;
+//    }
+//}
+
     public User login(String email, String password) {
         String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, email);
-            ps.setString(2, password);
+            ps.setString(1, email.trim());
+            ps.setString(2, password.trim());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 User u = new User();
@@ -43,7 +67,10 @@ public class UserDAO {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+            System.err.println("Login failed for email=" + email + " - SQL error: " + ex.getMessage());
         }
         return null;
     }
+
 }
+

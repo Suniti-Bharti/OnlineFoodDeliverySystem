@@ -11,6 +11,7 @@ public class RestaurantDAO {
 
     public List<Restaurant> getAllRestaurants() {
         List<Restaurant> list = new ArrayList<>();
+        System.out.println("DEBUG: RestaurantDAO returned size=" + list.size());
         String sql = "SELECT * FROM restaurants";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
@@ -23,6 +24,9 @@ public class RestaurantDAO {
                         rs.getDouble("rating")
                 );
                 list.add(r);
+
+                System.out.println("Loaded restaurant: " + r.getName() + " id=" + r.getRestaurantId());
+
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

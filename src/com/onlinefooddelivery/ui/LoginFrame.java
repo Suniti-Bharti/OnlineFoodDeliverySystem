@@ -54,6 +54,8 @@ public class LoginFrame extends JFrame {
             dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Invalid credentials");
+            System.out.println("Attempt login: email='" + email + "' password='" + pass + "'");
+
         }
     }
 }

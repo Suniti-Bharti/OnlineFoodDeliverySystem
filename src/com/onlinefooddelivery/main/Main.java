@@ -1,7 +1,13 @@
-package com.onlinefooddelivery.main;
+package com.onlinefooddelivery.main   ;
+
+import com.onlinefooddelivery.ui.LoginFrame;
+import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Online Food Delivery System Started...");
+        SwingUtilities.invokeLater(() -> {
+            LoginFrame f = new LoginFrame();
+            f.setVisible(true);
+        });
     }
 }

@@ -4,29 +4,26 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * DBConnection helper. Ensure MySQL Connector/J is on classpath.
+ * Update URL/USERNAME/PASSWORD for your environment.
+ */
 public class DBConnection {
-
-    // ✔ Change only USERNAME and PASSWORD below as per your MySQL login
     private static final String URL = "jdbc:mysql://localhost:3306/fooddeliverydb?useSSL=false&serverTimezone=UTC";
-    private static final String USERNAME = "root";    // <-- your MySQL username
-    private static final String PASSWORD = "root@12345678";   // <-- your MySQL password
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "root@12345678";
 
     private static Connection connection = null;
 
     public static synchronized Connection getConnection() throws SQLException {
         try {
             if (connection == null || connection.isClosed()) {
-
-                // ✔ Load MySQL Driver
                 Class.forName("com.mysql.cj.jdbc.Driver");
-
-                // ✔ Connect to database
                 connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             }
             return connection;
-
         } catch (ClassNotFoundException e) {
-            throw new SQLException("MySQL Driver not found. Add mysql-connector-j.jar to your classpath.", e);
+            throw new SQLException("MySQL Driver not found", e);
         }
     }
 }

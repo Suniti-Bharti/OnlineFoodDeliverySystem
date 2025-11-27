@@ -174,3 +174,20 @@ SELECT * FROM order_items;
 
 
 
+
+
+## Fixes applied by assistant (automated)
+- Replaced DBConnection with a robust implementation using `com.mysql.cj.jdbc.Driver`.
+- Restaurant list UI now shows sample restaurants as a fallback when the database is unreachable.
+- Login UI wraps DB calls to surface an error message instead of crashing.
+
+## How to build & run (locally)
+1. Install JDK (11+) and MySQL.
+2. Create a MySQL database named `fooddeliverydb` and run `database.sql` to create tables and sample data.
+3. Add MySQL Connector/J to the classpath. Example (using terminal, from project root):
+   ```
+   javac -cp "path/to/mysql-connector-java.jar" -d build src/com/onlinefooddelivery/**/*.java
+   java -cp "build:path/to/mysql-connector-java.jar" com.onlinefooddelivery.main.Main
+   ```
+4. If you don't want a DB, the app will still start and show sample restaurants (offline fallback).
+
